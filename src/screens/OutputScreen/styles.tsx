@@ -1,59 +1,85 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: 60,
+    paddingHorizontal: 24,
   },
-  overlay: {
-    width: 342,
-    height:342,
-    backgroundColor: 'rgba(255,255,255,0.85)',
-    padding: 24,
-    borderRadius: 16,
+  headerRow: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    gap: 16,
+    marginBottom: 24,
   },
-  title: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#222',
-    marginBottom: 8,
-  },
-  sectionLabel: {
+  header: {
     fontSize: 20,
-    lineHeight:25,
-    color: '#FAFAFA',
-    fontFamily: 'Manrope-ExtraBold',
-  
+    fontWeight: '700',
+    color: '#fff',
+    fontFamily: 'Manrope-Bold',
+  },
+  closeButtonText: {
+    color: '#fff',
+    fontSize: 22,
+  },
+  logoCard: {
+    width: windowWidth - 48,
+    height: windowWidth - 48,
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 24,
   },
   image: {
+    width: '100%',
+    height: '100%',
     borderRadius: 12,
-    backgroundColor: '#eee',
-  },
-  prompt: {
-    fontSize: 16,
-    color: '#444',
-    fontStyle: 'italic',
-    textAlign: 'center',
-    maxWidth: '90%',
-    marginVertical: 12,
   },
   promptBox: {
-  backgroundColor: 'rgba(255,255,255,0.1)',
-  borderRadius: 12,
-  padding: 12,
-  maxWidth: '90%',
-  minHeight: 60,
-  justifyContent: 'center',
-},
-
-promptText: {
-  color: '#fff',
-  fontSize: 16,
-},
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderRadius: 12,
+    padding: 16,
+    width: '100%',
+    marginBottom: 24,
+  },
+  promptHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 6,
+  },
+  promptLabel: {
+    color: '#aaa',
+    fontSize: 12,
+  },
+  copyText: {
+    color: '#ccc',
+    fontSize: 13,
+  },
+  promptText: {
+    color: '#fff',
+    fontSize: 15,
+    lineHeight: 20,
+    marginBottom: 12,
+  },
+  styleTag: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#27272a',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 100,
+  },
+  styleTagText: {
+    color: '#fff',
+    fontSize: 13,
+  },
   button: {
-    marginTop: 16,
     backgroundColor: '#a24bcf',
     borderRadius: 24,
     paddingVertical: 14,
@@ -65,4 +91,5 @@ promptText: {
     fontSize: 16,
   },
 });
+
 export default styles;

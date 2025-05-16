@@ -32,6 +32,24 @@ const logoStyles = [
   { id: 'abstract', label: 'Abstract' },
   { id: 'mascot', label: 'Mascot' },
 ];
+const surprisePrompts = [
+  {
+    prompt: "Simple and clean logo",
+    style: "monogram",
+  },
+  {
+    prompt: "Retro and vintage style logo",
+    style: "abstract",
+  },
+  {
+    prompt: "Playful mascot logo",
+    style: "mascot",
+  },
+  {
+    prompt: "Minimalist and modern logo",
+    style: "no-style",
+  },
+];
 
 const InputScreen = ({ navigation }: Props) => {
   const [prompt, setPrompt] = useState('');
@@ -44,6 +62,12 @@ const InputScreen = ({ navigation }: Props) => {
     });
     return unsubscribe;
   }, [navigation]);
+
+  const handleSurpriseMe = () => {
+    const randomItem = surprisePrompts[Math.floor(Math.random() * surprisePrompts.length)];
+    setPrompt(randomItem.prompt);
+    setSelectedStyle(randomItem.style);
+  };
 
   const handleGenerate = async () => {
     if (!prompt.trim()) return;
@@ -109,7 +133,9 @@ const InputScreen = ({ navigation }: Props) => {
         <Text style={styles.header}>AI Logo</Text>
         <View style={styles.promptLabelRow}>
           <Text style={styles.sectionLabel}>Enter Your Prompt</Text>
-          <Text style={styles.surprise}>🎲 Surprise me</Text>
+          <TouchableOpacity onPress={handleSurpriseMe}>
+            <Text style={styles.surprise}>🎲 Surprise me</Text>
+          </TouchableOpacity>
         </View>
         <View style={{ position: 'relative' }}>
           <TextInput
