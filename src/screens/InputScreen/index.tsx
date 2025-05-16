@@ -12,6 +12,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import styles from './styles';
 import { RootStackParamList } from '../../../App';
+import Stars from '../../components/svg/Stars';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -106,12 +107,14 @@ const InputScreen = ({ navigation }: Props) => {
           {status === 'idle' && (
             <TouchableOpacity onPress={handleGenerate}>
               <LinearGradient
-                colors={['#4b32d0', '#a24bcf']}
+                colors={['#2938DC', '#943DFF']}
+                locations={[0, 0.7]}
                 start={[0, 0]}
                 end={[1, 1]}
-                style={styles.button}
+                style={[styles.button, { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }]}
               >
-                <Text style={styles.buttonText}>Create ✨</Text>
+                <Text style={[styles.buttonText, { marginRight: 4 }]}>Create</Text>
+                <Stars />
               </LinearGradient>
             </TouchableOpacity>
           )}
