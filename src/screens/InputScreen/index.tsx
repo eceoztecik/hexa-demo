@@ -1,3 +1,5 @@
+import { db } from '../../firebase/firebaseConfig';
+import { collection, addDoc, serverTimestamp, updateDoc, doc } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -17,6 +19,12 @@ import Stars from '../../components/svg/Stars';
 const windowWidth = Dimensions.get('window').width;
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Input'>;
+const styleToImageMap: Record<string, string> = {
+  monogram: 'image1',
+  abstract: 'image2',
+  mascot: 'image3',
+  'no-style': 'image4',
+};
 
 const logoStyles = [
   { id: 'no-style', label: 'No Style' },
@@ -37,17 +45,39 @@ const InputScreen = ({ navigation }: Props) => {
     return unsubscribe;
   }, [navigation]);
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     if (!prompt.trim()) return;
 
     setStatus('processing');
 
-    const delay = Math.floor(Math.random() * 30 + 30) * 1000;
+    try {
+      const docRef = await addDoc(collection(db, 'logos'), {
+        prompt,
+        style: selectedStyle,
+        status: 'processing',
+        createdAt: serverTimestamp(),
+      });
 
-    setTimeout(() => {
-      setStatus('done');
-      navigation.navigate('Output', { prompt });
-    }, delay);
+      const delay = Math.floor(Math.random() * 30 + 30) * 1000;
+
+      setTimeout(async () => {
+        const imageKey = styleToImageMap[selectedStyle] || 'image1';
+        await updateDoc(doc(db, 'logos', docRef.id), {
+          status: 'done',
+          imageKey,
+        });
+
+        navigation.navigate('Output', {
+          prompt,
+          imageKey,
+        });
+
+
+        setStatus('done');
+      }, delay);
+    } catch (error) {
+      console.error('Hata:', error);
+    }
   };
 
   const renderStyleItem = ({ item }: any) => (

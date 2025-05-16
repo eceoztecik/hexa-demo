@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, Text, Image, Dimensions, ImageBackground, TouchableOpacity } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
-import styles from './styles';
 import { RootStackParamList } from '../../../App';
+import styles from './styles';
 
 type OutputScreenRouteProp = RouteProp<RootStackParamList, 'Output'>;
 
@@ -11,8 +11,15 @@ type Props = {
 };
 
 const OutputScreen = ({ route }: Props) => {
-  const { prompt } = route.params;
+
+  const { prompt, imageKey } = route.params;
   const windowWidth = Dimensions.get('window').width;
+  const imageMap: Record<string, any> = {
+    image1: require('../../../assets/images/image1.png'),
+    image2: require('../../../assets/images/image2.png'),
+    image3: require('../../../assets/images/image3.png'),
+    image4: require('../../../assets/images/image4.png'),
+  };
 
   return (
     <ImageBackground
@@ -20,21 +27,22 @@ const OutputScreen = ({ route }: Props) => {
       style={styles.background}
       resizeMode="cover"
     >
-      <View style={styles.overlay}>
-        <Text style={styles.title}>Your Logo is Ready!</Text>
+      <Text style={styles.sectionLabel}>Logo Styles</Text>
 
+      <View style={styles.overlay}>
         <Image
-          source={require('../../../assets/mock-image.png')}
+          source={imageMap[imageKey] || imageMap['image1']}
           style={[styles.image, { width: windowWidth - 48, height: windowWidth - 48 }]}
-          resizeMode="cover"
+          resizeMode="contain"
         />
 
-        <Text style={styles.prompt}>{prompt}</Text>
-
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Download</Text>
-        </TouchableOpacity>
       </View>
+      <View style={styles.promptBox}>
+        <Text style={styles.promptText}>{prompt}</Text>
+      </View>
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Download</Text>
+      </TouchableOpacity>
     </ImageBackground>
   );
 };

@@ -8,7 +8,7 @@ import { useFonts } from 'expo-font';
 
 export type RootStackParamList = {
   Input: undefined;
-  Output: { prompt: string };
+  Output: { prompt: string; imageKey: string; };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

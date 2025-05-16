@@ -6,18 +6,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   overlay: {
+    width: 342,
+    height:342,
+    backgroundColor: 'rgba(255,255,255,0.85)',
     padding: 24,
-    width: '90%',
-    justifyContent: 'center',
+    borderRadius: 16,
     alignItems: 'center',
     gap: 16,
-    backgroundColor: 'rgba(255,255,255,0.85)',
-    borderRadius: 16,
   },
   title: {
     fontSize: 22,
-    fontWeight: '600',
+    fontWeight: '700',
     color: '#222',
+    marginBottom: 8,
+  },
+  sectionLabel: {
+    fontSize: 20,
+    lineHeight:25,
+    color: '#FAFAFA',
+    fontFamily: 'Manrope-ExtraBold',
+  
   },
   image: {
     borderRadius: 12,
@@ -26,16 +34,30 @@ const styles = StyleSheet.create({
   prompt: {
     fontSize: 16,
     color: '#444',
-    textAlign: 'center',
     fontStyle: 'italic',
+    textAlign: 'center',
     maxWidth: '90%',
+    marginVertical: 12,
   },
+  promptBox: {
+  backgroundColor: 'rgba(255,255,255,0.1)',
+  borderRadius: 12,
+  padding: 12,
+  maxWidth: '90%',
+  minHeight: 60,
+  justifyContent: 'center',
+},
+
+promptText: {
+  color: '#fff',
+  fontSize: 16,
+},
   button: {
     marginTop: 16,
     backgroundColor: '#a24bcf',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
+    borderRadius: 24,
+    paddingVertical: 14,
+    paddingHorizontal: 40,
   },
   buttonText: {
     color: '#fff',
