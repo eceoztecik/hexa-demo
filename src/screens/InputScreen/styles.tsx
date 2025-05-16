@@ -11,10 +11,12 @@ const styles = StyleSheet.create({
   },
   header: {
     textAlign: 'center',
-    fontSize: 20,
-    fontWeight: '600',
+    fontSize: 17,
+    fontFamily: 'Manrope-ExtraBold',
+    lineHeight:22,
     marginBottom: 24,
-    color: '#fff',
+    color: '#FAFAFA',
+    marginTop:40
   },
   promptLabelRow: {
     flexDirection: 'row',
@@ -23,27 +25,31 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   sectionLabel: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#fff',
+    fontSize: 20,
+    lineHeight:25,
+    color: '#FAFAFA',
+    fontFamily: 'Manrope-ExtraBold',
+  
   },
   surprise: {
-    fontSize: 14,
-    color: '#aaa',
+    fontSize: 13,
+    fontFamily: 'Monrope-Regular',
+    color: '#FAFAFA',
+    lineHeight:18
   },
   promptInput: {
     borderRadius: 16,
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    backgroundColor: '#27272A',
     color: '#fff',
     padding: 16,
-    height: 120,
+    height: 175,
     textAlignVertical: 'top',
   },
   charCount: {
-    color: '#999',
+    color: '#71717A',
     fontSize: 12,
-    marginTop: 4,
-    marginBottom: 24,
+    lineHeight:14,
+    fontFamily: 'Manrope-Regular',
   },
   styleList: {
     marginVertical: 12,
@@ -85,6 +91,14 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 16,
   },
+  charCountOverlay: {
+  position: 'absolute',
+  bottom: 8,
+  left: 12,
+  fontSize: 12,
+  color: '#999',
+  fontFamily: 'Manrope-Regular',
+}
 });
 
 export default styles;

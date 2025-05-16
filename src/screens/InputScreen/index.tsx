@@ -76,23 +76,22 @@ const InputScreen = ({ navigation }: Props) => {
     >
       <View style={styles.container}>
         <Text style={styles.header}>AI Logo</Text>
-
         <View style={styles.promptLabelRow}>
           <Text style={styles.sectionLabel}>Enter Your Prompt</Text>
           <Text style={styles.surprise}>🎲 Surprise me</Text>
         </View>
-
-        <TextInput
-          style={styles.promptInput}
-          placeholder="A blue lion logo reading 'HEXA' in bold letters"
-          placeholderTextColor="#ccc"
-          multiline
-          maxLength={500}
-          value={prompt}
-          onChangeText={setPrompt}
-        />
-        <Text style={styles.charCount}>{prompt.length}/500</Text>
-
+        <View style={{ position: 'relative' }}>
+          <TextInput
+            style={styles.promptInput}
+            placeholder="A blue lion logo reading 'HEXA' in bold letters"
+            placeholderTextColor="#71717A"
+            multiline
+            maxLength={500}
+            value={prompt}
+            onChangeText={setPrompt}
+          />
+          <Text style={styles.charCountOverlay}>{prompt.length}/500</Text>
+        </View>
         <Text style={styles.sectionLabel}>Logo Styles</Text>
         <FlatList
           horizontal
