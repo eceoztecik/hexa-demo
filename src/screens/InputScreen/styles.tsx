@@ -26,15 +26,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 8,
   },
-  sectionLabel: {
-    fontSize: 20,
-    lineHeight: 25,
-    color: '#FAFAFA',
-    fontFamily: 'Manrope-ExtraBold',
+  promptInputWrapper: {
+    position: 'relative',
   },
-  logoStyleLabel: {
-    marginTop: 20,
-  },
+
   surprise: {
     fontSize: 13,
     fontFamily: 'Monrope-Regular',
@@ -63,6 +58,12 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     alignItems: 'center',
   },
+  buttonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
   buttonText: {
     color: '#fff',
     fontWeight: '600',
@@ -76,40 +77,16 @@ const styles = StyleSheet.create({
     color: '#999',
     fontFamily: 'Manrope-Regular',
   },
-  styleList: {
-    marginVertical: 12,
-  },
-  styleItem: {
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginRight: 12,
-  borderRadius: 12,
-  borderWidth: 2,
-  borderColor: 'transparent',
-  backgroundColor: 'transparent',
-  flexDirection: 'column', // Dikey hizalama
-},
-
-styleIcon: {
-  width: 80,
-  height: 80,
-  resizeMode: 'contain',
-},
-
-styleLabel: {
-  marginTop: 5,
-  fontSize: 13,
-  lineHeight: 18,
-  fontFamily: 'Manrope-Regular',
-  color: '#71717A',
-  textAlign: 'center',
-},
-  selectedStyleLabel: {
+  sectionLabel: {
+    fontSize: 20,
+    lineHeight: 25,
     color: '#FAFAFA',
-    fontFamily: 'Manrope-Bold',
+    fontFamily: 'Manrope-ExtraBold',
   },
 
+  statusBannerWrapper: {
+    marginTop: 50,
+  },
 });
 
 export default styles;
-

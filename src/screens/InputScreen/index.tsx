@@ -5,63 +5,24 @@ import {
   View,
   Text,
   TextInput,
-  FlatList,
   TouchableOpacity,
   ImageBackground,
-  Image,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import styles from './styles';
 import { RootStackParamList } from '../../../App';
 import Stars from '../../components/svg/Stars';
-
+import StatusBanner from '../../components/StatusBanner';
+import { styleToImageMap, surprisePrompts } from '../../../utils/constants';
+import LogoStyleSelector from '../../components/LogoStyleSelector';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Input'>;
-
-const styleToImageMap: Record<string, string> = {
-  monogram: 'image1',
-  abstract: 'image2',
-  mascot: 'image3',
-  'no-style': 'image4',
-};
-const imageMap: Record<string, any> = {
-  image1: require('../../../assets/images/image1.png'),
-  image2: require('../../../assets/images/image2.png'),
-  image3: require('../../../assets/images/image3.png'),
-  image4: require('../../../assets/images/image4.png'),
-};
-
-const logoStyles = [
-  { id: 'no-style', label: 'No Style' },
-  { id: 'monogram', label: 'Monogram' },
-  { id: 'abstract', label: 'Abstract' },
-  { id: 'mascot', label: 'Mascot' },
-];
-
-const surprisePrompts = [
-  {
-    prompt: "Simple and clean logo",
-    style: "monogram",
-  },
-  {
-    prompt: "Retro and vintage style logo",
-    style: "abstract",
-  },
-  {
-    prompt: "Playful mascot logo",
-    style: "mascot",
-  },
-  {
-    prompt: "Minimalist and modern logo",
-    style: "no-style",
-  },
-];
 
 const InputScreen = ({ navigation }: Props) => {
   const [prompt, setPrompt] = useState('');
   const [selectedStyle, setSelectedStyle] = useState('no-style');
-  const [status, setStatus] = useState<'idle' | 'processing' | 'done'>('idle');
+  const [status, setStatus] = useState<'idle' | 'processing' | 'done' | 'error'>('idle');
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -98,43 +59,12 @@ const InputScreen = ({ navigation }: Props) => {
           imageKey,
         });
 
-        navigation.navigate('Output', {
-          prompt,
-          imageKey,
-        });
-
         setStatus('done');
       }, delay);
     } catch (error) {
       console.error('Hata:', error);
+      setStatus('error');
     }
-  };
-
-  const renderStyleItem = ({ item }: { item: { id: string; label: string } }) => {
-    const imageKey = styleToImageMap[item.id] || 'image1';
-
-    return (
-      <View>
-      <TouchableOpacity
-        style={[
-          styles.styleItem,
-          selectedStyle === item.id && styles.selectedStyleItem,
-        ]}
-        onPress={() => setSelectedStyle(item.id)}
-      >
-        <Image source={imageMap[imageKey]} style={styles.styleIcon} />
-      
-      </TouchableOpacity>
-       <Text
-          style={[
-            styles.styleLabel,
-            selectedStyle === item.id && styles.selectedStyleLabel,
-          ]}
-        >
-          {item.label}
-        </Text>
-        </View>
-    );
   };
 
   return (
@@ -144,6 +74,20 @@ const InputScreen = ({ navigation }: Props) => {
       resizeMode="cover"
     >
       <View style={styles.container}>
+        <View style={styles.statusBannerWrapper}>
+          <StatusBanner
+            status={status}
+            prompt={prompt}
+            selectedStyle={selectedStyle}
+            onRetry={handleGenerate}
+            onNavigate={() =>
+              navigation.navigate('Output', {
+                prompt,
+                imageKey: styleToImageMap[selectedStyle] || 'image1',
+              })
+            }
+          />
+        </View>
         <Text style={styles.header}>AI Logo</Text>
         <View style={styles.promptLabelRow}>
           <Text style={styles.sectionLabel}>Enter Your Prompt</Text>
@@ -151,7 +95,8 @@ const InputScreen = ({ navigation }: Props) => {
             <Text style={styles.surprise}>🎲 Surprise me</Text>
           </TouchableOpacity>
         </View>
-        <View style={{ position: 'relative' }}>
+
+        <View style={styles.promptInputWrapper}>
           <TextInput
             style={styles.promptInput}
             placeholder="A blue lion logo reading 'HEXA' in bold letters"
@@ -163,39 +108,34 @@ const InputScreen = ({ navigation }: Props) => {
           />
           <Text style={styles.charCountOverlay}>{prompt.length}/500</Text>
         </View>
-        <Text style={[styles.sectionLabel, styles.logoStyleLabel]}>
-          Logo Styles
-        </Text>
-        <FlatList
-          horizontal
-          data={logoStyles}
-          renderItem={renderStyleItem}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.styleList}
-          showsHorizontalScrollIndicator={false}
+        {/* 
+            <TouchableOpacity onPress={() => setStatus('error')} style={{ marginTop: 20, padding: 10, backgroundColor: 'red' }}>
+          <Text style={{ color: 'white' }}>Test Error</Text>
+        </TouchableOpacity>
+         */}
+
+        <LogoStyleSelector
+          selectedStyle={selectedStyle}
+          setSelectedStyle={setSelectedStyle}
         />
 
         <View style={styles.buttonContainer}>
-          {status === 'idle' && (
-            <TouchableOpacity onPress={handleGenerate}>
-              <LinearGradient
-                colors={['#2938DC', '#943DFF']}
-                locations={[0, 0.7]}
-                start={[0, 0]}
-                end={[1, 1]}
-                style={[styles.button, { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }]}
-              >
-                <Text style={[styles.buttonText, { marginRight: 4 }]}>Create</Text>
-                <Stars />
-              </LinearGradient>
-            </TouchableOpacity>
-          )}
-
-          {status === 'processing' && (
-            <View style={[styles.button, { backgroundColor: '#444' }]}>
-              <Text style={[styles.buttonText, { color: '#ccc' }]}>Processing...</Text>
-            </View>
-          )}
+          <TouchableOpacity onPress={handleGenerate} disabled={status === 'processing'}>
+            <LinearGradient
+              colors={['#2938DC', '#943DFF']}
+              locations={[0, 0.7]}
+              start={[0, 0]}
+              end={[1, 1]}
+              style={[
+                styles.button,
+                styles.buttonContent,
+                { opacity: status === 'processing' ? 0.5 : 1 }
+              ]}
+            >
+              <Text style={[styles.buttonText, { marginRight: 4 }]}>Create</Text>
+              <Stars />
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>
