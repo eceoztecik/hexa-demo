@@ -14,13 +14,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 24,
+    marginBottom: 15,
   },
   header: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#fff',
-    fontFamily: 'Manrope-Bold',
+    fontSize: 22,
+    lineHeight: 28,
+    color: '#FAFAFA',
+    fontFamily: 'Manrope-ExtraBold',
   },
   closeButtonText: {
     color: '#fff',
@@ -31,15 +31,38 @@ const styles = StyleSheet.create({
     height: windowWidth - 48,
     backgroundColor: '#fff',
     borderRadius: 16,
-    padding: 12,
+    padding: 20,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 24,
   },
-  image: {
-    width: '100%',
-    height: '100%',
+  logoShape: {
+    width: 120,
+    height: 120,
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 12,
+  },
+  logoShapeText: {
+    fontSize: 72,
+    color: '#fff',
+    textAlign: 'center',
+  },
+  abstractContainer: {
+    width: 120,
+    height: 120,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  abstractShape: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+  },
+  logoText: {
+    fontSize: 28,
+    color: '#222',
+    textAlign: 'center',
   },
   promptBox: {
     backgroundColor: 'rgba(255,255,255,0.1)',
@@ -70,7 +93,7 @@ const styles = StyleSheet.create({
   },
   styleTag: {
     alignSelf: 'flex-start',
-    backgroundColor: '#27272a',
+    backgroundColor: '#FAFAFA1A',
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 100,
@@ -78,17 +101,6 @@ const styles = StyleSheet.create({
   styleTagText: {
     color: '#fff',
     fontSize: 13,
-  },
-  button: {
-    backgroundColor: '#a24bcf',
-    borderRadius: 24,
-    paddingVertical: 14,
-    paddingHorizontal: 40,
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: '600',
-    fontSize: 16,
   },
 });
 

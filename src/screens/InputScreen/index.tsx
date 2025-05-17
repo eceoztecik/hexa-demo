@@ -7,8 +7,8 @@ import {
   TextInput,
   FlatList,
   TouchableOpacity,
-  Dimensions,
   ImageBackground,
+  Image,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -16,14 +16,20 @@ import styles from './styles';
 import { RootStackParamList } from '../../../App';
 import Stars from '../../components/svg/Stars';
 
-const windowWidth = Dimensions.get('window').width;
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Input'>;
+
 const styleToImageMap: Record<string, string> = {
   monogram: 'image1',
   abstract: 'image2',
   mascot: 'image3',
   'no-style': 'image4',
+};
+const imageMap: Record<string, any> = {
+  image1: require('../../../assets/images/image1.png'),
+  image2: require('../../../assets/images/image2.png'),
+  image3: require('../../../assets/images/image3.png'),
+  image4: require('../../../assets/images/image4.png'),
 };
 
 const logoStyles = [
@@ -32,6 +38,7 @@ const logoStyles = [
   { id: 'abstract', label: 'Abstract' },
   { id: 'mascot', label: 'Mascot' },
 ];
+
 const surprisePrompts = [
   {
     prompt: "Simple and clean logo",
@@ -96,7 +103,6 @@ const InputScreen = ({ navigation }: Props) => {
           imageKey,
         });
 
-
         setStatus('done');
       }, delay);
     } catch (error) {
@@ -104,24 +110,32 @@ const InputScreen = ({ navigation }: Props) => {
     }
   };
 
-  const renderStyleItem = ({ item }: any) => (
-    <TouchableOpacity
-      style={[
-        styles.styleItem,
-        selectedStyle === item.id && styles.selectedStyleItem,
-      ]}
-      onPress={() => setSelectedStyle(item.id)}
-    >
-      <Text
+  const renderStyleItem = ({ item }: { item: { id: string; label: string } }) => {
+    const imageKey = styleToImageMap[item.id] || 'image1';
+
+    return (
+      <View>
+      <TouchableOpacity
         style={[
-          styles.styleLabel,
-          selectedStyle === item.id && styles.selectedStyleLabel,
+          styles.styleItem,
+          selectedStyle === item.id && styles.selectedStyleItem,
         ]}
+        onPress={() => setSelectedStyle(item.id)}
       >
-        {item.label}
-      </Text>
-    </TouchableOpacity>
-  );
+        <Image source={imageMap[imageKey]} style={styles.styleIcon} />
+      
+      </TouchableOpacity>
+       <Text
+          style={[
+            styles.styleLabel,
+            selectedStyle === item.id && styles.selectedStyleLabel,
+          ]}
+        >
+          {item.label}
+        </Text>
+        </View>
+    );
+  };
 
   return (
     <ImageBackground
@@ -149,7 +163,9 @@ const InputScreen = ({ navigation }: Props) => {
           />
           <Text style={styles.charCountOverlay}>{prompt.length}/500</Text>
         </View>
-        <Text style={styles.sectionLabel}>Logo Styles</Text>
+        <Text style={[styles.sectionLabel, styles.logoStyleLabel]}>
+          Logo Styles
+        </Text>
         <FlatList
           horizontal
           data={logoStyles}
@@ -185,4 +201,5 @@ const InputScreen = ({ navigation }: Props) => {
     </ImageBackground>
   );
 };
+
 export default InputScreen;
