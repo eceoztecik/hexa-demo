@@ -1,6 +1,7 @@
 
 import { StyleSheet, Dimensions } from 'react-native';
 const windowWidth = Dimensions.get('window').width;
+const { height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   background: {
@@ -16,9 +17,8 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontFamily: 'Manrope-ExtraBold',
     lineHeight: 22,
-    marginBottom: 24,
     color: '#FAFAFA',
-    marginTop: 40
+    marginTop: height * 0.06,
   },
   promptLabelRow: {
     flexDirection: 'row',
@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
   },
 
   statusBannerWrapper: {
-    marginTop: 50,
+    marginTop: 24,
+    marginBottom: 24,
   },
 });
 

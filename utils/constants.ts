@@ -24,8 +24,8 @@ export const logoStyles = [
 
 // Rastgele önerilecek prompt ve stiller
 export const surprisePrompts = [
-  { prompt: "Simple and clean logo", style: "monogram" },
-  { prompt: "Retro and vintage style logo", style: "abstract" },
-  { prompt: "Playful mascot logo", style: "mascot" },
-  { prompt: "Minimalist and modern logo", style: "no-style" },
+  { prompt: "Ece Software for Simple and clean logo", style: "monogram" },
+  { prompt: "Vintage Co. for Retro and vintage style logo", style: "abstract" },
+  { prompt: "Happy Paws for Playful mascot logo", style: "mascot" },
+  { prompt: "Nova Studio for Minimalist and modern logo", style: "no-style" },
 ];

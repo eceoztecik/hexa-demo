@@ -74,6 +74,7 @@ const InputScreen = ({ navigation }: Props) => {
       resizeMode="cover"
     >
       <View style={styles.container}>
+        <Text style={styles.header}>AI Logo</Text>
         <View style={styles.statusBannerWrapper}>
           <StatusBanner
             status={status}
@@ -88,7 +89,6 @@ const InputScreen = ({ navigation }: Props) => {
             }
           />
         </View>
-        <Text style={styles.header}>AI Logo</Text>
         <View style={styles.promptLabelRow}>
           <Text style={styles.sectionLabel}>Enter Your Prompt</Text>
           <TouchableOpacity onPress={handleSurpriseMe}>
@@ -110,8 +110,8 @@ const InputScreen = ({ navigation }: Props) => {
         </View>
         {/* 
             <TouchableOpacity onPress={() => setStatus('error')} style={{ marginTop: 20, padding: 10, backgroundColor: 'red' }}>
-          <Text style={{ color: 'white' }}>Test Error</Text>
-        </TouchableOpacity>
+            <Text style={{ color: 'white' }}>Test Error</Text>
+            </TouchableOpacity>
          */}
 
         <LogoStyleSelector

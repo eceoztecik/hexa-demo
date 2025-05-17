@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, StyleSheet, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import LogoPreview from './LogoPreview';
 import { styleToImageMap } from '../../utils/constants';
+const { height } = Dimensions.get('window');
 
 type StatusBannerProps = {
   status: 'idle' | 'processing' | 'done' | 'error';
@@ -76,7 +77,6 @@ const StatusBanner = ({
   statusBox: {
     padding: 16,
     borderRadius: 16,
-    marginBottom: 16,
     flexDirection: 'row',
     alignItems: 'center',
   },
